@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Calculator - Padma College</title>
+    
+    <!-- Tailwind & Animate CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <!-- External CSS Link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="p-4 md:p-8 min-h-screen flex items-center justify-center">
+    <div class="max-w-xl w-full">
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">পদ্মা কলেজ, রাজশাহী</h1>
+            <p class="text-blue-600 font-semibold mt-1">সেশন ও ফর্ম ফিলাপ ক্যালকুলেটর (২০২৪-২৫)</p>
+            <div class="mt-2 inline-block px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-bold rounded-full border border-yellow-200 uppercase tracking-tighter">
+                ⚠️ Unofficial Personal Site
+            </div>
+        </div>
+
+        <!-- Highlighted Info Section -->
+        <div class="highlight-box p-4 mb-6 rounded-r-lg shadow-sm animate__animated animate__fadeInDown">
+            <p class="text-sm text-gray-700 leading-relaxed">
+                📅 <span class="font-bold">সেশন শুরুর তারিখ:</span> ১৫ জুলাই ২০২৪ | <span class="font-bold">ক্লাস শুরু:</span> ১৮ আগস্ট ২০২৪ <br>
+                💰 <span class="font-bold">সেশন ফি (মোট):</span> ১০,১৫০/- (বেতন, পরীক্ষা ও ইয়ার চেঞ্জ সহ) <br>
+                📝 <span class="font-bold">ফর্ম ফিলাপ:</span> সায়েন্স ৩৪৩৫/- | আর্টস/কমার্স ৩১৫৫/- | <span class="font-bold">পিকনিক:</span> ৫০০/-
+            </p>
+        </div>
+
+        <!-- Main Calculator Card -->
+        <div class="card p-6 md:p-8 animate__animated animate__fadeIn">
+            <div class="space-y-6">
+                <!-- Department Selection -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-600 mb-2">আপনার বিভাগ নির্বাচন করুন</label>
+                    <select id="department" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-lg">
+                        <option value="science">বিজ্ঞান (Science)</option>
+                        <option value="arts">মানবিক/ব্যবসায় (Arts/Commerce)</option>
+                    </select>
+                </div>
+
+                <!-- Paid Months -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-600 mb-2">কত মাসের বেতন দিয়েছেন? (সর্বোচ্চ ২৪)</label>
+                    <input type="number" id="paidMonths" min="0" max="24" placeholder="যেমন: ২১" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition text-lg">
+                </div>
+
+                <!-- Exam Fees -->
+                <div>
+                    <label class="block text-sm font-bold text-gray-600 mb-2">কয়টি পরীক্ষার ফি দিয়েছেন? (সর্বোচ্চ ৪টি)</label>
+                    <select id="paidExams" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-lg">
+                        <option value="0">০টি পরীক্ষা</option>
+                        <option value="1">১টি পরীক্ষা</option>
+                        <option value="2">২টি পরীক্ষা</option>
+                        <option value="3">৩টি পরীক্ষা</option>
+                        <option value="4">৪টি পরীক্ষা</option>
+                    </select>
+                </div>
+
+                <!-- Toggles Section -->
+                <div class="space-y-3">
+                    <div class="flex items-center p-4 bg-blue-50 rounded-lg border border-blue-100">
+                        <input type="checkbox" id="yearChangePaid" class="w-5 h-5 text-blue-600 rounded cursor-pointer">
+                        <label for="yearChangePaid" class="ml-3 text-sm font-bold text-blue-900 cursor-pointer">
+                            ইয়ার চেঞ্জ ফি (১২৫০/-) জমা দিয়েছেন?
+                        </label>
+                    </div>
+
+                    <div class="flex items-center p-4 bg-purple-50 rounded-lg border border-purple-100">
+                        <input type="checkbox" id="wentPicnic" checked class="w-5 h-5 text-purple-600 rounded cursor-pointer">
+                        <label for="wentPicnic" class="ml-3 text-sm font-bold text-purple-900 cursor-pointer">
+                            আপনি কি পিকনিক এ গিয়েছেন? (গিয়ে থাকলে ৫০০/- যোগ হবে)
+                        </label>
+                    </div>
+
+                    <div class="flex items-center p-4 bg-green-50 rounded-lg border border-green-100">
+                        <input type="checkbox" id="formFillupPaid" class="w-5 h-5 text-green-600 rounded cursor-pointer">
+                        <label for="formFillupPaid" class="ml-3 text-sm font-bold text-green-900 cursor-pointer">
+                            ফর্ম ফিলাপের টাকা জমা দিয়েছেন?
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Calculate Button -->
+                <button onclick="calculateFees()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition transform active:scale-95 text-lg">
+                    হিসাব দেখুন
+                </button>
+            </div>
+
+            <!-- Result Area -->
+            <div id="resultArea" class="mt-8 hidden animate__animated animate__fadeInUp">
+                <div id="congratsBox" class="hidden mb-4 p-4 bg-green-100 border border-green-200 text-green-800 rounded-lg text-center font-bold">
+                    🎉 অভিনন্দন! আপনার সকল বকেয়া পরিশোধিত।
+                </div>
+
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
+                    <div class="space-y-3 border-b pb-4 mb-4">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-600 font-medium">মোট সেশন ফি (ফিক্সড):</span>
+                            <span class="font-bold">১০,১৫০ ৳</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-600 font-medium">ফর্ম ফিলাপ ফি:</span>
+                            <span id="formFillupDisplay" class="font-bold">0 ৳</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span id="picnicStatusLabel" class="text-gray-600 font-medium italic text-xs">পিকনিক ফি:</span>
+                            <span id="picnicDisplayAmount" class="font-bold text-sm">0 ৳</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-2 text-gray-800">
+                            <span class="font-bold">সর্বমোট সম্ভাব্য খরচ:</span>
+                            <span id="grandTotalLabel" class="text-xl font-bold">0 ৳</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-gray-600 font-medium text-green-600">আপনার মোট জমা:</span>
+                        <span id="totalPaid" class="text-xl font-bold text-green-600">0 ৳</span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center pt-2 border-t border-dashed border-gray-300">
+                        <span class="text-gray-700 font-bold text-red-600">মোট বকেয়া (বাকি):</span>
+                        <span id="totalDue" class="text-2xl font-black text-red-600">0 ৳</span>
+                    </div>
+
+                    <!-- Status Box -->
+                    <div id="statusMessage" class="mt-6 p-4 bg-white border border-gray-100 rounded-lg text-sm text-gray-700 shadow-sm">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Note -->
+        <div class="mt-6 p-4 bg-white rounded-lg border border-gray-200 text-xs text-gray-500 italic text-center">
+            <p><strong>দ্রষ্টব্য:</strong> এটি শুধুমাত্র একটি ধারণা দেওয়ার জন্য। আপনার প্রকৃত বকেয়া এবং ফি সংক্রান্ত নিশ্চিত তথ্যের জন্য অবশ্যই কলেজ অফিস বা কর্তৃপক্ষের সাথে যোগাযোগ করুন।।</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-8 text-center pb-8">
+            <p class="text-gray-400 text-[10px] uppercase font-bold tracking-widest mb-1">Developed by</p>
+            <h3 class="text-gray-700 font-black text-xl">Rafid Tech BD</h3>
+        </div>
+    </div>
+
+    <!-- External JavaScript Link -->
+    <script src="script.js"></script>
+</body>
+</html>
