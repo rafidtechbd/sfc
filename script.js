@@ -16,7 +16,7 @@ function calculateFees() {
     const isFormFillupPaid = document.getElementById('formFillupPaid').checked;
 
     if (paidMonths > 24) {
-        alert("সেশন সর্বোচ্চ ২৪ মাসের হতে পারে।");
+        alert("সেশন সর্বোচ্চ 24 মাসের হতে পারে।");
         paidMonthsInput.value = 24;
         return;
     }
@@ -43,23 +43,23 @@ function calculateFees() {
     const statusMessage = document.getElementById('statusMessage');
 
     resultArea.classList.remove('hidden');
-    document.getElementById('formFillupDisplay').innerText = currentFormFillupRate.toLocaleString() + " ৳";
-    document.getElementById('grandTotalLabel').innerText = grandTotal.toLocaleString() + " ৳";
-    document.getElementById('totalPaid').innerText = totalPaid.toLocaleString() + " ৳";
-    document.getElementById('totalDue').innerText = totalDue.toLocaleString() + " ৳";
+    // .toLocaleString('en-US') use kora hoyeche jeno browser ar vasa ja-i hok, songkha english ei ashe
+    document.getElementById('formFillupDisplay').innerText = currentFormFillupRate.toLocaleString('en-US') + " ৳";
+    document.getElementById('grandTotalLabel').innerText = grandTotal.toLocaleString('en-US') + " ৳";
+    document.getElementById('totalPaid').innerText = totalPaid.toLocaleString('en-US') + " ৳";
+    document.getElementById('totalDue').innerText = totalDue.toLocaleString('en-US') + " ৳";
 
     // Picnic Status UI Update
     const picnicLabel = document.getElementById('picnicStatusLabel');
     const picnicAmount = document.getElementById('picnicDisplayAmount');
     
     if (wentPicnic) {
-        // আপনার নির্দেশমতো লেখাটি পরিবর্তন করা হয়েছে
         picnicLabel.innerHTML = "পিকনিক এ গিয়েছেন:";
-        picnicAmount.innerText = "৫০০ ৳";
+        picnicAmount.innerText = "500 ৳";
         picnicAmount.classList.remove('text-gray-400');
     } else {
         picnicLabel.innerHTML = "পিকনিক এ যাননি:";
-        picnicAmount.innerText = "০ ৳";
+        picnicAmount.innerText = "0 ৳";
         picnicAmount.classList.add('text-gray-400');
     }
 
@@ -78,11 +78,11 @@ function calculateFees() {
         hasDue = true;
     }
     if (!isYearChangePaid) {
-        details += `<li class="text-red-600 font-semibold">• ইয়ার চেঞ্জ ফি (১২৫০/-)</li>`;
+        details += `<li class="text-red-600 font-semibold">• ইয়ার চেঞ্জ ফি (1250/-)</li>`;
         hasDue = true;
     }
     if (!isFormFillupPaid) {
-        details += `<li class="text-red-600 font-semibold">• ফর্ম ফিলাপের ফি (${currentFormFillupRate}/-)</li>`;
+        details += `<li class="text-red-600 font-semibold">• ফর্ম ফিলাপের ফি (${currentFormFillupRate.toLocaleString('en-US')}/-)</li>`;
         hasDue = true;
     }
     details += `</ul>`;
